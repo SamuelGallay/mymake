@@ -1,8 +1,11 @@
-mymake: main.o regle.o regle.h
-	gcc main.o regle.o -o mymake
+mymake: main.o rules.o parser.o rules.h parser.h
+	gcc main.o rules.o parser.o -o mymake
 
-main.o: main.c
+main.o: main.c rules.h parser.h
 	gcc -c main.c
 
-regle.o: regle.c regle.h
-	gcc -c regle.c
+rules.o: rules.c rules.h
+	gcc -c rules.c
+
+parser.o: parser.c parser.h rules.h 
+	gcc -c parser.c
