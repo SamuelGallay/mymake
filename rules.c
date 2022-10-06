@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "rules.h"
+
 void print_rule(Rule *r) {
   printf("%s: ", r->target);
   for (int i = 0; i < r->nb_deps; i++) {

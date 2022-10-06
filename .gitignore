@@ -4,3 +4,4 @@ test/main
 mymake
 vgcore*
 *.exe
+old_mymake
