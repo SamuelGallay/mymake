@@ -47,5 +47,5 @@ int main() {
   }
   free(lr);
 
-  printf("\nHello World !\n");
+  // printf("\nHello World !\n");
 }

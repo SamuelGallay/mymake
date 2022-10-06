@@ -7,11 +7,11 @@
 
 // Remove leading and trailing blanks while being completly unsafe O(len(l))
 char *remove_blanks(char *l) {
-  while (*l == ' ' || *l == '\t' || *l == '\n') {
+  while (*l == ' ' || *l == '\t' || *l == '\n' || *l == '\r') {
     l++;
   }
   int k = strlen(l) - 1;
-  while (k >= 0 && (l[k] == ' ' || l[k] == '\t' || l[k] == '\n')) {
+  while (k >= 0 && (l[k] == ' ' || l[k] == '\t' || l[k] == '\n' || l[k] == '\r')) {
     l[k] = '\0';
     k--;
   }
