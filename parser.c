@@ -68,7 +68,7 @@ Rule *read_rules(int *nb_rules_allocated) {
 
       // Creation of the new rule :
       nr++;
-      lr = realloc(lr, nr * sizeof(struct Rule));
+      lr = realloc(lr, nr * sizeof(Rule));
       assert(lr != NULL);
       lr[nr - 1].target = malloc(strlen(target) + 1);
       strcpy(lr[nr - 1].target, target);

@@ -11,7 +11,6 @@ typedef struct Rule {
 
 void print_rule(Rule *r);
 
-
 void print_list_of_rules(Rule *lr, int nr); 
 
 int free_Rule(Rule *r); 
