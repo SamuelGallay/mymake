@@ -27,7 +27,7 @@ Rule *read_rules(int *nb_rules_allocated) {
   while (getline(&line, &buf_size, file) != -1) {
     if (line[0] == '\t' && nr > 0) {
       char *command = remove_blanks(line);
-      printf("COMMAND : %s\n\n", command);
+      //printf("COMMAND : %s\n\n", command);
       lr[nr - 1].nb_cmds++;
       lr[nr - 1].cmds =
           realloc(lr[nr - 1].cmds, lr[nr - 1].nb_cmds * sizeof(char *));
@@ -46,8 +46,8 @@ Rule *read_rules(int *nb_rules_allocated) {
       dependencies = remove_blanks(dependencies);
       assert(strlen(dependencies) != 0);
 
-      printf("TARGET : %s\n", target);
-      printf("DEPENDENCIES : %s\n", dependencies);
+      //printf("TARGET : %s\n", target);
+      //printf("DEPENDENCIES : %s\n", dependencies);
 
       int nb_dependencies = 1;
       char **deps = malloc(nb_dependencies * sizeof(char *));
@@ -63,8 +63,8 @@ Rule *read_rules(int *nb_rules_allocated) {
         deps[nb_dependencies - 1] = malloc(strlen(dep) + 1);
         strcpy(deps[nb_dependencies - 1], dep);
       }
-      printf("NB_DEPS : %i\n", nb_dependencies);
-      printf("\n");
+      //printf("NB_DEPS : %i\n", nb_dependencies);
+      //printf("\n");
 
       // Creation of the new rule :
       nr++;
@@ -81,8 +81,8 @@ Rule *read_rules(int *nb_rules_allocated) {
     else {
       char *nl = remove_blanks(line);
       if (strlen(nl) > 0) {
-        printf("I don't know what to do with this non-trivial line: %s\n\n",
-               nl);
+        //printf("I don't know what to do with this non-trivial line: %s\n\n",
+        //       nl);
         exit(-1);
       }
     }
