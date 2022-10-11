@@ -30,7 +30,8 @@ Rule *search_target(char *t, Rule *lr, int nr) {
   return NULL;
 }
 
-void compile(char *t, Rule *lr, int nr) {
+void compile(char *t, Rule *lr, int nr, int max_rec_level) {
+  assert(max_rec_level >= 0);
   // printf("Compiling \'%s\'...\n", t);
   Rule *r = search_target(t, lr, nr);
   if (r == NULL) {
@@ -38,7 +39,7 @@ void compile(char *t, Rule *lr, int nr) {
   } else {
     int t_dep = 0; // Most recent dependency modification
     for (int i = 0; i < r->nb_deps; i++) {
-      compile(r->deps[i], lr, nr);
+      compile(r->deps[i], lr, nr, max_rec_level - 1);
       t_dep = max2(t_dep, modified_time(r->deps[i]));
     }
     if (modified_time(t) == 0 || modified_time(t) <= t_dep) {
@@ -58,7 +59,7 @@ int main() {
 
   // print_list_of_rules(lr, nr);
 
-  compile(lr[0].target, lr, nr);
+  compile(lr[0].target, lr, nr, nr);
 
   // Free memory
   for (int i = 0; i < nr; i++) {
