@@ -15,14 +15,14 @@ Rule *search_target(char *t, Rule *lr, int nr) {
   return NULL;
 }
 
-void compile(char *t, Rule *lr, int nr) {
+void makenaif(char *t, Rule *lr, int nr) {
   printf("Compiling \'%s\'...\n", t);
   Rule *r = search_target(t, lr, nr);
   if (r == NULL) {
     // printf("No rule corresponding to target, nothing to do.\n");
   } else {
     for (int i = 0; i < r->nb_deps; i++) {
-      compile(r->deps[i], lr, nr);
+      makenaif(r->deps[i], lr, nr);
     }
     for (int i = 0; i < r->nb_cmds; i++) {
       printf("Command : %s\n", r->cmds[i]);
@@ -39,7 +39,7 @@ int main() {
 
   print_list_of_rules(lr, nr);
 
-  compile(lr[0].target, lr, nr);
+  makenaif(lr[0].target, lr, nr);
 
   // Free memory
   for (int i = 0; i < nr; i++) {
