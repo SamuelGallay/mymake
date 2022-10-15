@@ -5,7 +5,7 @@
 #include "rules.h"
 
 
-// Remove leading and trailing blanks while being completly unsafe O(len(l))
+// Remove leading and trailing blanks, O(len(l)), do not allocate nor free memory
 char *remove_blanks(char *l) {
   while (*l == ' ' || *l == '\t' || *l == '\n' || *l == '\r') {
     l++;
@@ -25,6 +25,7 @@ Rule *read_rules(int *nb_rules_allocated) {
   Rule *lr = NULL; // List of rules
   int nr = 0;      // Number of rules
   while (getline(&line, &buf_size, file) != -1) {
+    // If the line is a command
     if (line[0] == '\t' && nr > 0) {
       char *command = remove_blanks(line);
       //printf("COMMAND : %s\n\n", command);
@@ -35,6 +36,7 @@ Rule *read_rules(int *nb_rules_allocated) {
       strcpy(lr[nr - 1].cmds[lr[nr - 1].nb_cmds - 1], command);
     }
 
+    // If the line defines a new rule
     else if (strchr(line, ':') != NULL) {
       char *target = strtok(line, ":");
       assert(target != NULL);
@@ -77,7 +79,8 @@ Rule *read_rules(int *nb_rules_allocated) {
       lr[nr - 1].nb_cmds = 0;
       lr[nr - 1].cmds = NULL;
     }
-
+    
+    // If the line is empty
     else {
       char *nl = remove_blanks(line);
       if (strlen(nl) > 0) {

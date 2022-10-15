@@ -11,6 +11,7 @@
 
 int max2(int a, int b) { return a < b ? b : a; }
 
+// Time of last modification of file in 'path'
 int modified_time(char *path) {
   struct stat attr;
   if (stat(path, &attr) == 0) {
