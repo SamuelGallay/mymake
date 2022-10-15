@@ -52,14 +52,18 @@ void compile(char *t, Rule *lr, int nr, int max_rec_level) {
   // printf("Done compiling \'%s\' !\n", t);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   int nr;
   Rule *lr = read_rules(&nr);
   assert(lr != NULL);
 
   // print_list_of_rules(lr, nr);
 
-  compile(lr[0].target, lr, nr, nr);
+  if (argc >= 2) {
+    compile(argv[1], lr, nr, nr);
+  } else {
+    compile(lr[0].target, lr, nr, nr);
+  }
 
   // Free memory
   for (int i = 0; i < nr; i++) {
